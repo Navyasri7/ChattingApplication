@@ -1,0 +1,43 @@
+<html ng-app="myApp">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script>
+var myApp=angular.module('myApp',[]);
+myApp.controller('myCtrl',function($scope,$http){
+$http.get('http://localhost:3030/chatappmiddleware/getAllBlogs').success(function(data){
+$scope.blogs=data;
+});
+});
+</script>
+</head>
+<body ng-controller="myCtrl"><style>
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;   
+    padding: 8px;
+}
+
+</style>
+
+
+<table>
+<tr>
+<th>blogId</th>
+<th>blogName</th>
+<th>blogContent</th>
+</tr>
+<tr ng-repeat="blog in blogs">
+<td>{{ blog.blogId }}</td>
+<td>{{ blog.blogName }}</td>
+<td>{{ blog.blogContent }}</td>
+</tr>
+</table>
+</body>
+</html>
