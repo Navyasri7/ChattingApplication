@@ -1,5 +1,7 @@
 package com.chatdata.Dao;
 
+import java.util.List;
+
 import com.chatdata.model.Blog;
 
 public interface BlogDaoInt {
@@ -7,4 +9,5 @@ public interface BlogDaoInt {
  public void deleteBlog(String blogId);
  public void editBlog(Blog blog);
  public Blog getBlog(String blogId);
+ public List<Blog> getAllBlogs();
 }

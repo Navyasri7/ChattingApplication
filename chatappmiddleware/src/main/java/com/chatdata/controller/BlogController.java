@@ -2,6 +2,8 @@ package com.chatdata.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +38,8 @@ public class BlogController {
 		 blogDao.deleteBlog(blogId);
       return new ResponseEntity<Blog>(HttpStatus.OK);		
 	}
-	@GetMapping("/getblog")
-	public ResponseEntity<Blog> getBlog(@RequestParam ("blogId") String blogId){
+	@GetMapping("getblog/{blogId}")
+	public ResponseEntity<Blog> getBlog(@PathVariable ("blogId") String blogId){
 		System.out.println(blogId);
 		Blog blog=blogDao.getBlog(blogId);
 		return new ResponseEntity<Blog>(HttpStatus.OK);
@@ -49,4 +51,11 @@ public class BlogController {
 		blogDao.editBlog(blog);
 		return new ResponseEntity<Blog>(blog,HttpStatus.OK);
 	}
+	
+	@GetMapping("getAllBlogs")
+	public ResponseEntity<List<Blog>> getBlogs(){
+		List<Blog> blogs=blogDao.getAllBlogs();
+		return new ResponseEntity<List<Blog>>(blogs,HttpStatus.OK);
+	}
+	
 }
