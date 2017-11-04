@@ -1,0 +1,84 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function ($scope, $http) {
+$scope.id = null;
+$scope.firstName = null;
+$scope.lastName = null;
+$scope.emailId = null;
+$scope.password = null;
+$scope.mobileNo = null;
+$scope.postdata = function (id,firstName,lastName, emailId, password,mobileNo) {
+var data = {
+id: id,
+firstName: firstName,
+lastName: lastName,
+emailId: emailId,
+password: password,
+mobileNo: mobileNo
+};
+//Call the services
+$http.post('http://localhost:3030/chatappmiddleware/registerUser', data).then(function (response) {
+if (response.data)
+$scope.msg = "registration  is successfull";
+$scope.statusval = response.status;
+}, function (response) {
+
+
+});
+};
+});
+</script>
+</head>
+<body>
+<div class="container">
+		<div class="col-sm-6"
+			style="background-color: #0db9f2; border-radius: 30px; padding-bottom: 15px;padding-top: 5px;">
+
+<div align="center" style="font-size: 30px; color: green">
+				<b>Registration Form</b>
+			</div>
+<div ng-app="myApp" ng-controller="myCtrl">
+
+
+<div class="form-group">		
+<b>  Registration id </b> <br>
+<input class="form-control" placeholder="Enter Id" ng-model="id" path="id" />
+</div>
+<div class="form-group">		
+<b>  First Name </b> <br>
+<input class="form-control" placeholder="Enter First Name" ng-model="firstName" path="firstname" />
+</div>
+<div class="form-group">		
+<b>  Last Name </b> <br>
+<input class="form-control" placeholder="Enter Last Name" ng-model="lastName" path="lastname" />
+</div>
+<div class="form-group">		
+<b>  EmailId </b> <br>
+<input class="form-control" placeholder="Enter Email" ng-model="emailId" path="emailid" />
+</div>
+<div class="form-group">		
+<b>  password</b> <br>
+<input class="form-control" placeholder="Enter password" ng-model="password" path="password" />
+</div>
+<div class="form-group">		
+<b>  Mobile No</b> <br>
+<input class="form-control" placeholder="Enter mobile no" ng-model="mobileNo" path="mobileno" />
+</div>
+
+<div class="form-group">
+<input class="btn btn-primary" type="button" value="Send" ng-click="postdata(id,firstName,lastName, emailId, password,mobileNo)" /> <br/><br/>
+</div>
+</div>
+<p>Output Message : {{ msg }}</p>
+<p>StatusCode: {{ statusval }}</p>
+</div>
+</div class="col-sm-6">
+</div>
+</body>
+</html>

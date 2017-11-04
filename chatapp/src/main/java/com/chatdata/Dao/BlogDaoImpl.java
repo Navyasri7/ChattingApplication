@@ -33,9 +33,7 @@ public class BlogDaoImpl implements BlogDaoInt {
 		Session session=sessionFactory.getCurrentSession();
 		Blog blog=session.get(Blog.class,blogId);
 		session.delete(blog);
-		
-
-	}
+		}
 
 	public void editBlog(Blog blog) {
 		Session session = sessionFactory.getCurrentSession();
@@ -45,6 +43,8 @@ public class BlogDaoImpl implements BlogDaoInt {
 	public Blog getBlog(String blogId) {
 		Session session=sessionFactory.getCurrentSession();
 		Blog blog=(Blog)session.get(Blog.class, blogId);
+		blog.setApproved("true");
+		session.save(blog);
 		return blog;
 	}
 
@@ -60,14 +60,17 @@ public class BlogDaoImpl implements BlogDaoInt {
 		return query.getResultList();
 	}
 
-	public Blog blogApproved(Blog blog) {
+	/*public Blog blogApproved(Blog blog) {
 		Session session=sessionFactory.getCurrentSession();
+		
 		Query query=session.createQuery("from Blog where approved = ?");
 		query.setString(0, blog.getApproved());
-		 return  blog=(Blog)query.uniqueResult();
+		session.update(blog);
+		 return  blog=(Blog)query.getResult();
 		
 		
 		
-	}
+		
+	}*/
 
 }
