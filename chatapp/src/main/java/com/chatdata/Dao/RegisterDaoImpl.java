@@ -1,5 +1,6 @@
 package com.chatdata.Dao;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,12 @@ public class RegisterDaoImpl implements RegisterDaoInt {
 
 	}
 
+public Registration loginCheck(Registration register) {
+	Session session=sessionFactory.getCurrentSession();
+	Query query=session.createQuery("from Registration where id = ? and password = ?");
+	query.setString(0, register.getId());
+	query.setString(1, register.getPassword());
+	register =(Registration)query.uniqueResult();
+	return register;
+}	
 }

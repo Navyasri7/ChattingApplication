@@ -22,5 +22,11 @@ public class RegisterController {
 				return new ResponseEntity<Registration>(register,HttpStatus.OK);		
 			
 		}
+	@PostMapping("/login")
+	public ResponseEntity<Registration> loginCheck(@RequestBody Registration register){
+		registerDao.loginCheck(register);
+		return new ResponseEntity<Registration>(register,HttpStatus.OK);
+	}
+	
 
 }
