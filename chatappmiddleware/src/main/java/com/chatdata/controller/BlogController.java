@@ -57,5 +57,15 @@ public class BlogController {
 		List<Blog> blogs=blogDao.getAllBlogs();
 		return new ResponseEntity<List<Blog>>(blogs,HttpStatus.OK);
 	}
-	
+	@GetMapping("getBlog")
+	public ResponseEntity<List<Blog>> waitingForApproval(){
+		List<Blog> blogs=blogDao.waitingForApproval();
+		return new ResponseEntity<List<Blog>>(blogs,HttpStatus.OK);
+	}
+	@PostMapping("/reqApproved")
+	public ResponseEntity<Blog> blogApproved(@RequestBody Blog blog){
+		blogDao.blogApproved(blog);
+		return new ResponseEntity<Blog>(blog,HttpStatus.OK);
+		
+	}
 }

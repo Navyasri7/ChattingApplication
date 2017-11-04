@@ -10,4 +10,6 @@ public interface BlogDaoInt {
  public void editBlog(Blog blog);
  public Blog getBlog(String blogId);
  public List<Blog> getAllBlogs();
+ public List<Blog> waitingForApproval();
+ public Blog blogApproved(Blog blog);
 }
